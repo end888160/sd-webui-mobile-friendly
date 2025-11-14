@@ -75,6 +75,7 @@
     #txt2img_skip,
     #img2img_skip,
     #extras_skip {
+        bottom: 60px;
         z-index: 1001;
         width: 90% !important;
         background-color: var(--button-secondary-background-fill);
@@ -87,14 +88,12 @@
     #img2img_interrupting,
     #extras_interrupt,
     #extras_interrupting {
-        bottom: 12px;
         border-radius: 0 0 12px 12px;
     }
 
     #txt2img_skip,
     #img2img_skip,
     #extras_skip {
-        bottom: 60px;
         border-radius: 12px 12px 0 0;
     }
 

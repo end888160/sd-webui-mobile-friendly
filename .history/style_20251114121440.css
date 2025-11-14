@@ -87,7 +87,7 @@
     #img2img_interrupting,
     #extras_interrupt,
     #extras_interrupting {
-        bottom: 12px;
+        bottom: 12;
         border-radius: 0 0 12px 12px;
     }
 

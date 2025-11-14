@@ -1,0 +1,187 @@
+/* Apply only when screen is in portrait orientation */
+@media (orientation: portrait) {
+
+    .gradio-button.tool {
+        min-width: 2.5em !important;
+        height: 2.5em !important;
+        font-size: 18px;
+    }
+
+    .block.padded:not(.gradio-accordion) {
+        padding: 8px !important;
+    }
+
+    .gradio-container {
+        padding: 2px !important;
+    }
+
+    #quicksettings {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    #txt2img_generate {
+        z-index: 0;
+    }
+    #txt2img_skip {
+        z-index: 1;
+    }
+    #txt2img_interrupt {
+        z-index: 1;
+    }
+
+    #img2img_generate {
+        z-index: 0;
+    }
+    #img2img_skip {
+        z-index: 1;
+    }
+    #img2img_interrupt {
+        z-index: 1;
+    }
+
+       /* --- Sticky bottom button bar --- */
+    #txt2img_generate,
+    #txt2img_interrupt,
+    #img2img_generate,
+    #img2img_interrupt {
+        position: fixed !important;
+        bottom: 12px;          /* distance from bottom of viewport */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;         /* stay above other UI */
+        width: 90%;
+        max-width: 400px;
+        padding: 0.8em;
+        font-size: 1.1em;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* When both buttons are visible (Interrupt + Generate), stack them neatly */
+    #txt2img_interrupt,
+    #img2img_interrupt {
+        bottom: 60px;  /* place above the generate button */
+        background-color: var(--button-secondary-background-fill);
+    }
+
+    /* Ensure the result area scrolls normally and doesn't overlap fixed buttons */
+    #txt2img_results,
+    #img2img_results,
+    #extras_results {
+        position: relative !important;
+        z-index: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Ensure action buttons under the generated image stay within scroll flow */
+    #txt2img_results .gr-button,
+    #img2img_results .gr-button,
+    #extras_results .gr-button {
+        position: static !important;
+    }
+
+    /* Optional: give extra padding so fixed Generate button doesn't cover content */
+    #tab_txt2img,
+    #tab_img2img,
+    #tab_extras {
+        padding-bottom: 100px !important;
+    }
+    /* Sticky bottom Generate/Interrupt button for Extras tab */
+    #extras_generate {
+        position: fixed !important;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 90%;
+        max-width: 400px;
+        padding: 0.8em;
+        font-size: 1.1em;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Prevent overlapping results for Extras output area */
+    #extras_results {
+        position: relative !important;
+        z-index: auto !important;
+        overflow: visible !important;
+    }
+
+    #extras_results .gr-button {
+        position: static !important;
+    }
+
+    /* Space below content so fixed button doesn't cover it */
+    #tab_extras {
+        padding-bottom: 100px !important;
+    }
+
+    /* Sticky bottom Generate/Interrupt buttons */
+    #txt2img_generate,
+    #img2img_generate,
+    #extras_generate,
+    #txt2img_interrupt,
+    #img2img_interrupt,
+    #extras_interrupt,
+    #txt2img_interrupting,
+    #img2img_interrupting,
+    #txt2img_skip,
+    #img2img_skip {
+        position: fixed !important;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 90% !important;         /* prevent full-screen stretch */
+        max-width: 400px;
+        height: auto !important;       /* avoid flex-based stretching */
+        bottom: 12px;
+        padding: 0.8em;
+        font-size: 1.1em;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        margin: 0 !important;
+    }
+
+    /* Place Interrupt slightly above Generate when both exist */
+    #txt2img_interrupt,
+    #img2img_interrupt,
+    #txt2img_interrupting,
+    #img2img_interrupting,
+    #extras_interrupt {
+        bottom: 60px;
+        z-index: 1001;
+        width: 90% !important;
+        background-color: var(--button-secondary-background-fill);
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    #txt2img_skip,
+    #img2img_skip,
+    #extras_skip {
+        bottom: 60px;  /* place above the generate button */
+        z-index: 1001;
+        width: 90% !important;
+        background-color: var(--button-secondary-background-fill);
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+}

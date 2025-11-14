@@ -16,13 +16,21 @@
         padding: 2px !important;
     }
 
-    #quicksettings,
-    .form {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
+   #quicksettings {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr); /* two equal-width columns */
+        gap: 10px; /* space between items */
+        padding: 8px !important;
         width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Make each setting block visually like a control tile */
+    #quicksettings > * {
+        padding: 10px !important;
+        border-radius: 12px;
+        background: var(--input-background-fill);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */

@@ -1,0 +1,155 @@
+/* Apply only when screen is in portrait orientation */
+@media (orientation: portrait) {
+
+    /* --- General Mobile Styling --- */
+    .gradio-button.tool {
+        min-width: 2.5em !important;
+        height: 2.5em !important;
+        font-size: 18px;
+    }
+
+    .block.padded:not(.gradio-accordion) {
+        padding: 8px !important;
+    }
+
+    .gradio-container {
+        padding: 2px !important;
+    }
+
+    #quicksettings,
+    .form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+
+    /* ============================================================
+       = Sticky Generate Button (all modes)
+       ============================================================ */
+    #txt2img_generate,
+    #img2img_generate,
+    #extras_generate {
+        position: fixed !important;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 90% !important;
+        max-width: 400px;
+        padding: 0.8em;
+        font-size: 1.1em;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        margin: 0 !important;
+    }
+
+
+    /* ============================================================
+       = Horizontal Interrupt + Skip Button Bar
+       ============================================================ */
+
+    /* Base button positioning */
+    #txt2img_interrupt,
+    #txt2img_interrupting,
+    #txt2img_skip,
+    #img2img_interrupt,
+    #img2img_interrupting,
+    #img2img_skip,
+    #extras_interrupt,
+    #extras_interrupting,
+    #extras_skip {
+        position: fixed !important;
+        bottom: 60px; /* above Generate */
+        width: 45% !important;
+        max-width: 200px;
+        z-index: 1001;
+        margin: 0 !important;
+        padding: 0.8em;
+        font-size: 1.1em;
+        height: auto !important;
+    }
+
+    /* Interrupt (left side) */
+    #txt2img_interrupt,
+    #txt2img_interrupting,
+    #img2img_interrupt,
+    #img2img_interrupting,
+    #extras_interrupt,
+    #extras_interrupting {
+        border-radius: 12px 0 0 12px;
+        background-color: var(--button-secondary-background-fill);
+    }
+
+    /* Skip (right side) */
+    #txt2img_skip,
+    #img2img_skip,
+    #extras_skip {
+        border-radius: 0 12px 12px 0;
+        background-color: var(--button-secondary-background-fill);
+    }
+
+    /* Magic: Treat Interrupt + Skip as a horizontal flex container */
+    #txt2img_interrupt + #txt2img_skip,
+    #txt2img_interrupting + #txt2img_skip,
+    #img2img_interrupt + #img2img_skip,
+    #img2img_interrupting + #img2img_skip,
+    #extras_interrupt + #extras_skip,
+    #extras_interrupting + #extras_skip {
+        position: fixed !important;
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90% !important;
+        max-width: 400px;
+        pointer-events: none; /* wrapper shouldn't block clicks */
+    }
+
+    /* Re-enable click events for actual buttons */
+    #txt2img_interrupt,
+    #txt2img_interrupting,
+    #txt2img_skip,
+    #img2img_interrupt,
+    #img2img_interrupting,
+    #img2img_skip,
+    #extras_interrupt,
+    #extras_interrupting,
+    #extras_skip {
+        pointer-events: auto;
+    }
+
+
+    /* ============================================================
+       = Results Area (avoid overlap)
+       ============================================================ */
+    #txt2img_results,
+    #img2img_results,
+    #extras_results {
+        position: relative !important;
+        z-index: auto !important;
+        overflow: visible !important;
+    }
+
+    #txt2img_results .gr-button,
+    #img2img_results .gr-button,
+    #extras_results .gr-button {
+        position: static !important;
+    }
+
+
+    /* ============================================================
+       = Bottom Padding (content doesn't hide behind buttons)
+       ============================================================ */
+    #tab_txt2img,
+    #tab_img2img,
+    #tab_extras {
+        padding-bottom: 120px !important;
+    }
+
+}

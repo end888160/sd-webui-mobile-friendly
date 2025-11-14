@@ -24,6 +24,10 @@
         flex-wrap: wrap;
         width: 100%;
     }
+    #quicksettings {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
     /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */
     #txt2img_generate,

@@ -16,13 +16,19 @@
         padding: 2px !important;
     }
 
-    #quicksettings,
-    .form {
+    /* Enable 2 columns inside Quicksettings */
+    #quicksettings > div,
+    #quicksettings > * {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 100%;
+        flex: 0 0 50%;      /* 2 columns */
+        max-width: 50%;
+        box-sizing: border-box;
+        padding: 4px;       /* small spacing */
+    }
+
+    /* Fix labels shrinking or wrapping oddly */
+    #quicksettings label {
+        white-space: nowrap;
     }
 
     /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */
