@@ -63,7 +63,7 @@ git clone https://github.com/end888160/sd-webui-mobile-friendly
   The prompt template box overlaps with the generation result panel, causing layout issues on mobile.  
   (No fix yet — requires a dedicated compatibility patch.)
 
-<hr>
+-----
 
 <sup>**Disclaimer**</sup>  
 <sup>This extension does not make the WebUI inherently mobile-friendly.  

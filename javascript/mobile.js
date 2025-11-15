@@ -174,3 +174,51 @@
 }
 
 onUiLoaded(() => OnTheGo.main());
+
+function makeSliderVerticalSafe(sliderEl) {
+    let startX = 0;
+    let startY = 0;
+    let allowDrag = false;
+
+    sliderEl.addEventListener("pointerdown", (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        allowDrag = false;
+    });
+
+    sliderEl.addEventListener("pointermove", (e) => {
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+
+        // Only allow slider movement if horizontal swipe dominates
+        if (!allowDrag) {
+            if (dx > 6 && dx > dy) {
+                allowDrag = true;      // horizontal → OK
+            } else {
+                return;                // vertical → ignore
+            }
+        }
+    }, { passive: true });
+
+    // Block Gradio slider update logic when vertical
+    sliderEl.addEventListener("touchmove", (e) => {
+        if (!allowDrag) {
+            e.stopPropagation();
+        }
+    }, { passive: false });
+}
+
+// Apply to all Gradio sliders once UI loads
+function patchAllSliders() {
+    document.querySelectorAll(".gradio-slider").forEach(slider => {
+        makeSliderVerticalSafe(slider);
+    });
+}
+
+// MutationObserver so newly added sliders also get patched
+const observer = new MutationObserver(() => {
+    patchAllSliders();
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+patchAllSliders();

@@ -1,7 +1,15 @@
 /* Apply only when screen is in portrait orientation */
 @media (orientation: portrait) {
 
-    /* --- Global mobile adjustments --- */
+    :root {
+        --slider-thumb-size: 22px;
+        --checkbox-size: 20px;
+        --input-padding-x: 4px;
+        --input-padding-y: 4px;
+        --input-font-size: 1.1em;
+    }
+
+    /* === Global mobile adjustments === */
     .gradio-button.tool {
         min-width: 2.5em !important;
         height: 2.5em !important;
@@ -16,8 +24,135 @@
         padding: 8px !important;
     }
 
+    /* === Tabs fixes === */
+
     .tabitem {
         padding: 8px !important;
+    }
+    
+    .tab-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+    }
+
+    /* Prevent tab text from wrapping */
+    .tab-nav button,
+    .tab-nav .tabitem,
+    .tab-nav .tabitem-button,
+    .tab-nav * {
+        white-space: nowrap !important;
+    }
+
+    /* Optional: keep tabs compact */
+    .tab-nav button {
+        flex-shrink: 0;       /* prevents tabs from compressing too much */
+        padding: 8px 14px;    /* smaller padding for compact design */
+    }
+
+    /* === Input boxes fixes === */
+
+    /* Larger number input box (Gradio int/float) */
+    input.gradio-textbox,
+    input[type="number"] {
+        font-size: var(--input-font-size) !important;
+        padding: var(--input-padding-y) var(--input-padding-x) !important;
+        height: 2.6em !important;
+    }
+
+    /* Bigger slider thumb */
+    input[type="range"]::-webkit-slider-thumb {
+        width: var(--slider-thumb-size) !important;
+        height: var(--slider-thumb-size) !important;
+        border-radius: 50% !important;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: var(--slider-thumb-size) !important;
+        height: var(--slider-thumb-size) !important;
+        border-radius: 50% !important;
+    }
+
+    input[type="checkbox"] {
+        width: var(--checkbox-size) !important;
+        height: var(--checkbox-size) !important;
+    }
+
+    input[tyoe="text"] {
+        font-size: var(--input-font-size) !important;
+        padding: var(--input-padding-y) var(--input-padding-x) !important;
+        height: 2.6em !important;
+    }
+
+    /* === Model tabs fixes === */
+
+    /* Fix model sub-tabs (Lora, TI, Checkpoints) */
+    #txt2img_textual_inversion .tab-nav,
+    #img2img_textual_inversion .tab-nav,
+    #txt2img_checkpoints .tab-nav,
+    #img2img_checkpoints .tab-nav,
+    #txt2img_lora .tab-nav,
+    #img2img_lora .tab-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    /* Prevent sub-tab text from wrapping */
+    #txt2img_textual_inversion .tab-nav * ,
+    #img2img_textual_inversion .tab-nav * ,
+    #txt2img_checkpoints .tab-nav * ,
+    #img2img_checkpoints .tab-nav * ,
+    #txt2img_lora .tab-nav * ,
+    #img2img_lora .tab-nav * {
+        white-space: nowrap !important;
+    }
+
+    /* Prevent sub-tab text from scrolling */
+    #txt2img_textual_inversion .tab-nav,
+    #img2img_textual_inversion .tab-nav,
+    #txt2img_checkpoints .tab-nav,
+    #img2img_checkpoints .tab-nav,
+    #txt2img_lora .tab-nav,
+    #img2img_lora .tab-nav {
+        touch-action: pan-x !important;  /* allow only horizontal swipe */
+        overscroll-behavior: contain !important;
+    }
+
+    /* Shrink sub-tab buttons */
+    #txt2img_textual_inversion .tab-nav button,
+    #img2img_textual_inversion .tab-nav button,
+    #txt2img_checkpoints .tab-nav button,
+    #img2img_checkpoints .tab-nav button,
+    #txt2img_lora .tab-nav button,
+    #img2img_lora .tab-nav button {
+        flex-shrink: 0;
+        padding: 4px 10px !important;
+        font-size: 0.85em !important;
+    }
+
+    /* Ensure sub-tab fits in the available space */
+    #txt2img_textual_inversion select,
+    #img2img_textual_inversion select,
+    #txt2img_checkpoints select,
+    #img2img_checkpoints select,
+    #txt2img_lora select,
+    #img2img_lora select {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* Smooth scrolling for sub-tabs */
+    #txt2img_textual_inversion .tab-nav,
+    #img2img_textual_inversion .tab-nav,
+    #txt2img_checkpoints .tab-nav,
+    #img2img_checkpoints .tab-nav,
+    #txt2img_lora .tab-nav,
+    #img2img_lora .tab-nav {
+        scroll-behavior: smooth;
     }
 
     #quicksettings,
@@ -28,13 +163,46 @@
         flex-wrap: wrap;
         width: 100%;
     }
-    
-    .tab-nav {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
+
+    /* Prevent Physton Prompt-All-In-One toolbar from overlapping the bottom sticky bar */
+    .physton-prompt, 
+    #physton-prompt-container,
+    #physton-input-float,
+    .physton-float-toolbar {
+        margin-bottom: 60px !important;  /* adjust depending on your sticky button height */
     }
 
+
+    /* Move the tab-nav to the top as a horizontal strip */
+    #settings .tab-nav {
+        order: -1;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 6px;
+    }
+
+    #txt2img_tools,
+    #img2img_tools,
+    #extras_tools {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: wrap;              /* optional: wraps buttons nicely on small screens */
+        gap: 6px;                     /* optional: equal spacing between buttons */
+        width: 100%;
+    }
+    #txt2img_tools button,
+    #img2img_tools button,
+    #extras_tools button {
+        min-width: 2.8em;
+        height: 2.8em;
+        border-radius: 10px;
+        font-size: 1.1em;
+    }
+
+    /* === Sticky bottom action buttons === */
+    
     /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */
     #txt2img_generate,
     #img2img_generate {
@@ -127,10 +295,13 @@
         background-color: var(--button-secondary-background-fill);
     }
 
+    /* === Results area fixes === */
+
     /* --- Generated results area must scroll normally --- */
     #txt2img_results,
     #img2img_results,
     #extras_results {
+        margin-top: 0 !important;
         position: relative !important;
         overflow: visible !important;
         z-index: auto !important;
