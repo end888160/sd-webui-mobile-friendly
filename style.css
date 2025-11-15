@@ -13,7 +13,11 @@
     }
 
     .gradio-container {
-        padding: 2px !important;
+        padding: 8px !important;
+    }
+
+    .tabitem {
+        padding: 8px !important;
     }
 
     #quicksettings,
@@ -24,6 +28,12 @@
         flex-wrap: wrap;
         width: 100%;
     }
+    
+    .tab-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+    }
 
     /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */
     #txt2img_generate,
@@ -32,8 +42,13 @@
     }
     #txt2img_skip,
     #txt2img_interrupt,
+    #txt2img_interrupting,
     #img2img_skip,
-    #img2img_interrupt {
+    #img2img_interrupt,
+    #img2img_interrupting,
+    #extras_skip,
+    #extras_interrupt
+    #extras_interrupting {
         z-index: 1;
     }
 
@@ -59,13 +74,15 @@
         padding: 0.8em;
         font-size: 1.1em;
         border-radius: 12px;
-        height: auto !important;
+        height: 48px !important;
         margin: 0 !important;
         z-index: 1000;
         box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     }
 
-    /* Interrupt/Skip stacked above Generate */
+    /* --- Horizontal Split: Skip and Interrupt Buttons --- */
+
+    /* 1. Define the Skip and Interrupt buttons to be a fixed split bar */
     #txt2img_interrupt,
     #txt2img_interrupting,
     #img2img_interrupt,
@@ -75,27 +92,39 @@
     #txt2img_skip,
     #img2img_skip,
     #extras_skip {
-        z-index: 1001;
-        width: 90% !important;
+        /* Critical positioning properties */
+        position: fixed !important;
+        bottom: 12px; /* Position them above the Generate button (at bottom: 12px) */
+        width: 45% !important; /* Half of 90% wide total, but we need two */
+        height: 48px; /* Fixed height for consistent look */
+        margin: 0 !important;
+        padding: 0.8em;
+        font-size: 1.1em;
+        z-index: 1001; /* Ensure they are above the Generate button */
+    }
+    
+
+    /* 2. Position the Skip button (Left side) */
+    #txt2img_skip,
+    #img2img_skip,
+    #extras_skip {
+        left: 5%; /* Align to the left edge of the 90% wide area (5% gap on left) */
+        transform: none !important; /* Remove the translateX(-50%) override */
+        border-radius: 12px 0 0 12px !important; /* Rounded corner on the left only */
         background-color: var(--button-secondary-background-fill);
     }
 
-    /* Rounded-corner logic for stacked buttons */
+    /* 3. Position the Interrupt button (Right side) */
     #txt2img_interrupt,
     #txt2img_interrupting,
     #img2img_interrupt,
     #img2img_interrupting,
     #extras_interrupt,
     #extras_interrupting {
-        bottom: 12px;
-        border-radius: 0 0 12px 12px;
-    }
-
-    #txt2img_skip,
-    #img2img_skip,
-    #extras_skip {
-        bottom: 60px;
-        border-radius: 12px 12px 0 0;
+        left: 50%; /* Start exactly where the Skip button ends (5% + 45%) */
+        transform: none !important; /* Remove the translateX(-50%) override */
+        border-radius: 0 12px 12px 0 !important; /* Rounded corner on the right only */
+        background-color: var(--button-secondary-background-fill);
     }
 
     /* --- Generated results area must scroll normally --- */
@@ -120,4 +149,6 @@
     #tab_extras {
         padding-bottom: 100px !important;
     }
+
+    
 }
