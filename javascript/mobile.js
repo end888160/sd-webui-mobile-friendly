@@ -45,12 +45,9 @@
             }
         }
 
-        /* ----------------------------------------------
-           2. Store & adjust Generate button parent padding
-        ---------------------------------------------- */
-        const box = generateBtn.parentElement;
-        this.ensureStored(store, "box_padding", box.style.padding);
-        box.style.padding = "10px";
+          /* ----------------------------------------------
+              2. (Removed) Generate button padding is handled by CSS
+          ---------------------------------------------- */
 
         /* ----------------------------------------------
            3. Move results ABOVE everything
@@ -124,11 +121,7 @@
             });
         }
 
-        // Restore padding
-        const gen = this.$(prefix + "generate");
-        if (gen && store.box_padding !== undefined) {
-            gen.parentElement.style.padding = store.box_padding;
-        }
+        // Padding restoration removed; CSS handles layout now
 
         // Restore interrogate display (img2img only)
         if (mode === "img") {
@@ -167,7 +160,7 @@
         if (this.initialized) return;
         this.initialized = true;
 
-        const mql = window.matchMedia("(orientation: portrait)");
+        const mql = window.matchMedia("(max-width: 703px)");
         this.handleOrientation(mql);
         mql.addEventListener("change", (e) => this.handleOrientation(e.target));
     }

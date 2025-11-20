@@ -57,12 +57,6 @@ git clone https://github.com/end888160/sd-webui-mobile-friendly
 6. Centers action buttons inside each `form`.
 7. Keeps the **Generate / Interrupt / Skip** button fixed at the bottom of the viewport for quick access.
 
-## Known Incompatibilities
-
-- **[sd-webui-prompt-all-in-one](https://github.com/Physton/sd-webui-prompt-all-in-one)**  
-  The prompt template box overlaps with the generation result panel, causing layout issues on mobile.  
-  (No fix yet — requires a dedicated compatibility patch.)
-
 -----
 
 <sup>**Disclaimer**</sup>  

@@ -1,11 +1,21 @@
-/* Apply only when screen is in portrait orientation */
+/* Apply only when screen width is less than 768px */
 @media (orientation: portrait) {
+    /* === Prompt-All-In-One fixes === */
 
+    /* Prevent Physton Prompt-All-In-One toolbar from overlapping the bottom sticky bar */
+    .physton-prompt, 
+    #physton-prompt-container,
+    #physton-input-float,
+    .physton-float-toolbar {
+        margin-bottom: 60px !important;  /* adjust depending on your sticky button height */
+    }
+}
+@media (max-width: 703px) {
     :root {
         --slider-thumb-size: 22px;
         --checkbox-size: 20px;
-        --input-padding-x: 4px;
-        --input-padding-y: 4px;
+        --input-padding-x: 12px;
+        --input-padding-y: 6px;
         --input-font-size: 1.1em;
     }
 
@@ -54,12 +64,15 @@
 
     /* Larger number input box (Gradio int/float) */
     input.gradio-textbox,
-    input[type="number"] {
+    input[type="number"],
+    input[type="text"],
+    ul.options li.item, 
+    option {
         font-size: var(--input-font-size) !important;
         padding: var(--input-padding-y) var(--input-padding-x) !important;
         height: 2.6em !important;
     }
-
+    
     /* Bigger slider thumb */
     input[type="range"]::-webkit-slider-thumb {
         width: var(--slider-thumb-size) !important;
@@ -78,82 +91,13 @@
         height: var(--checkbox-size) !important;
     }
 
-    input[tyoe="text"] {
+    input[type="text"] {
         font-size: var(--input-font-size) !important;
         padding: var(--input-padding-y) var(--input-padding-x) !important;
-        height: 2.6em !important;
     }
+    
 
     /* === Model tabs fixes === */
-
-    /* Fix model sub-tabs (Lora, TI, Checkpoints) */
-    #txt2img_textual_inversion .tab-nav,
-    #img2img_textual_inversion .tab-nav,
-    #txt2img_checkpoints .tab-nav,
-    #img2img_checkpoints .tab-nav,
-    #txt2img_lora .tab-nav,
-    #img2img_lora .tab-nav {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-    }
-
-    /* Prevent sub-tab text from wrapping */
-    #txt2img_textual_inversion .tab-nav * ,
-    #img2img_textual_inversion .tab-nav * ,
-    #txt2img_checkpoints .tab-nav * ,
-    #img2img_checkpoints .tab-nav * ,
-    #txt2img_lora .tab-nav * ,
-    #img2img_lora .tab-nav * {
-        white-space: nowrap !important;
-    }
-
-    /* Prevent sub-tab text from scrolling */
-    #txt2img_textual_inversion .tab-nav,
-    #img2img_textual_inversion .tab-nav,
-    #txt2img_checkpoints .tab-nav,
-    #img2img_checkpoints .tab-nav,
-    #txt2img_lora .tab-nav,
-    #img2img_lora .tab-nav {
-        touch-action: pan-x !important;  /* allow only horizontal swipe */
-        overscroll-behavior: contain !important;
-    }
-
-    /* Shrink sub-tab buttons */
-    #txt2img_textual_inversion .tab-nav button,
-    #img2img_textual_inversion .tab-nav button,
-    #txt2img_checkpoints .tab-nav button,
-    #img2img_checkpoints .tab-nav button,
-    #txt2img_lora .tab-nav button,
-    #img2img_lora .tab-nav button {
-        flex-shrink: 0;
-        padding: 4px 10px !important;
-        font-size: 0.85em !important;
-    }
-
-    /* Ensure sub-tab fits in the available space */
-    #txt2img_textual_inversion select,
-    #img2img_textual_inversion select,
-    #txt2img_checkpoints select,
-    #img2img_checkpoints select,
-    #txt2img_lora select,
-    #img2img_lora select {
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-
-    /* Smooth scrolling for sub-tabs */
-    #txt2img_textual_inversion .tab-nav,
-    #img2img_textual_inversion .tab-nav,
-    #txt2img_checkpoints .tab-nav,
-    #img2img_checkpoints .tab-nav,
-    #txt2img_lora .tab-nav,
-    #img2img_lora .tab-nav {
-        scroll-behavior: smooth;
-    }
 
     #quicksettings,
     .form {
@@ -164,13 +108,7 @@
         width: 100%;
     }
 
-    /* Prevent Physton Prompt-All-In-One toolbar from overlapping the bottom sticky bar */
-    .physton-prompt, 
-    #physton-prompt-container,
-    #physton-input-float,
-    .physton-float-toolbar {
-        margin-bottom: 60px !important;  /* adjust depending on your sticky button height */
-    }
+    
 
 
     /* Move the tab-nav to the top as a horizontal strip */
@@ -202,25 +140,8 @@
     }
 
     /* === Sticky bottom action buttons === */
-    
-    /* Fix z-index defaults for Generate/Skip/Interrupt (all tabs) */
-    #txt2img_generate,
-    #img2img_generate {
-        z-index: 0;
-    }
-    #txt2img_skip,
-    #txt2img_interrupt,
-    #txt2img_interrupting,
-    #img2img_skip,
-    #img2img_interrupt,
-    #img2img_interrupting,
-    #extras_skip,
-    #extras_interrupt
-    #extras_interrupting {
-        z-index: 1;
-    }
 
-    /* --- Sticky bottom action buttons (Generate / Interrupt / Skip) --- */
+    /* Base styling for all action buttons (Generate, Skip, Interrupt) */
     #txt2img_generate,
     #txt2img_interrupt,
     #txt2img_interrupting,
@@ -239,18 +160,46 @@
         bottom: 12px;
         width: 90% !important;
         max-width: 400px;
-        padding: 0.8em;
-        font-size: 1.1em;
         border-radius: 12px;
         height: 48px !important;
         margin: 0 !important;
         z-index: 1000;
         box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        line-height: 24px !important;
+        padding: 0 !important;
     }
 
-    /* --- Horizontal Split: Skip and Interrupt Buttons --- */
+    /* Neutralize parent generate_box divs to prevent layout interference */
+    #txt2img_generate_box,
+    #img2img_generate_box,
+    #extras_generate_box {
+        all: initial !important;
+        display: contents !important;
+    }
 
-    /* 1. Define the Skip and Interrupt buttons to be a fixed split bar */
+    /* Force consistent text height and centering in generate buttons */
+    #txt2img_generate > span,
+    #img2img_generate > span,
+    #extras_generate > span {
+        line-height: 1 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Prevent internal elements from causing extra height */
+    #txt2img_generate *,
+    #img2img_generate *,
+    #extras_generate * {
+        flex: none !important;
+    }
+
+    /* Horizontal Split: Skip and Interrupt Buttons --- */
+
+    /* Base styling for Skip and Interrupt buttons */
     #txt2img_interrupt,
     #txt2img_interrupting,
     #img2img_interrupt,
@@ -260,44 +209,57 @@
     #txt2img_skip,
     #img2img_skip,
     #extras_skip {
-        /* Critical positioning properties */
         position: fixed !important;
-        bottom: 12px; /* Position them above the Generate button (at bottom: 12px) */
-        width: 45% !important; /* Half of 90% wide total, but we need two */
-        height: 48px; /* Fixed height for consistent look */
+        bottom: 12px;
+        width: 45% !important;
+        height: 48px !important;
         margin: 0 !important;
         padding: 0.8em;
         font-size: 1.1em;
-        z-index: 1001; /* Ensure they are above the Generate button */
+        z-index: 1001;
     }
-    
 
-    /* 2. Position the Skip button (Left side) */
+    /* Position Skip button on the left side */
     #txt2img_skip,
     #img2img_skip,
     #extras_skip {
-        left: 5%; /* Align to the left edge of the 90% wide area (5% gap on left) */
-        transform: none !important; /* Remove the translateX(-50%) override */
-        border-radius: 12px 0 0 12px !important; /* Rounded corner on the left only */
+        left: 5%;
+        transform: none !important;
+        border-radius: 12px 0 0 12px !important;
         background-color: var(--button-secondary-background-fill);
     }
 
-    /* 3. Position the Interrupt button (Right side) */
+    /* Position Interrupt button on the right side */
     #txt2img_interrupt,
     #txt2img_interrupting,
     #img2img_interrupt,
     #img2img_interrupting,
     #extras_interrupt,
     #extras_interrupting {
-        left: 50%; /* Start exactly where the Skip button ends (5% + 45%) */
-        transform: none !important; /* Remove the translateX(-50%) override */
-        border-radius: 0 12px 12px 0 !important; /* Rounded corner on the right only */
+        left: 50%;
+        transform: none !important;
+        border-radius: 0 12px 12px 0 !important;
         background-color: var(--button-secondary-background-fill);
     }
 
+    /* Height fix for consistent button height */
+    #txt2img_interrupt,
+    #txt2img_interrupting,
+    #txt2img_skip,
+    #img2img_interrupt,
+    #img2img_interrupting,
+    #img2img_skip,
+    #extras_generate,
+    #extras_interrupt,
+    #extras_interrupting,
+    #extras_skip {
+        height: 72px !important;
+    }
+
+
     /* === Results area fixes === */
 
-    /* --- Generated results area must scroll normally --- */
+    /* Allow results area to scroll normally without fixed positioning */
     #txt2img_results,
     #img2img_results,
     #extras_results {
@@ -307,19 +269,18 @@
         z-index: auto !important;
     }
 
-    /* Buttons under generated images must not be sticky */
+    /* Ensure buttons under generated images are not affected by sticky positioning */
     #txt2img_results .gr-button,
     #img2img_results .gr-button,
     #extras_results .gr-button {
         position: static !important;
     }
 
-    /* Padding so fixed Generate button doesn't cover content */
+    /* Add bottom padding to prevent fixed buttons from covering content */
     #tab_txt2img,
     #tab_img2img,
     #tab_extras {
         padding-bottom: 100px !important;
     }
 
-    
 }
